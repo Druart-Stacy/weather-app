@@ -1,29 +1,43 @@
 //-------------GSM-----------------------------------------------------------
-body{
-    background-color:beige;
-}
-.content {
+body {
     background-image: url(https://images.ctfassets.net/c3jfdk52c306/yurigahama-beach_04/76e74560651a6c54d343c57bdfe184cb/yurigahama-beach_04.jpg?fit=fill&w=1100&h=750&fm=webp);
     background-repeat: no-repeat;
     background-position: center; /* Centre l'image */
     background-size: cover; /* Couvre tout l'élément */
     height: 800px;
-    width: 1500px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.content {
+    display: flex;
+}
+
+.mainContent {
+    display:flex;
     
-  }
+    
+}
+#méteo{
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Style pour l'icône de bascule de mode sombre */
-#toggle-dark-mode {
-    color: var(--text-color, #ffffff); /* Couleur du texte */
-}
-
-/* Style pour le mode sombre */
-.dark-mode {
-    background-color: var(--background-color, grey); /* Couleur de fond */
-}
+body {
+    padding: 25px;
+    background-color: white;
+    color: black;
+    font-size: 25px;
+  }
+  
+  .dark-mode {
+    background-color: gray;
+    color: white;
+  }
 
 //--------------------ecran------------
 @media only screen and (mix-width: 480px){

@@ -1,91 +1,83 @@
-const apiKey = '61658e0f6a55b135fb312c5229d16fc5'; // Votre clé API OpenWeatherMap
+// Module pour la création des éléments DOM
+const createElements = () => {
+    const mainContent = document.createElement('main');
+    const form = document.createElement('form');
+    const weather = document.createElement('h1');
+    const demo = document.createElement('p');
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    const buttonVal = document.createElement('button');
+    const content = document.createElement('div');
+    const buttonDark = document.createElement('button');
 
-        // Créer le bouton pour basculer le mode sombre
-        const icon = document.createElement("i");
-        icon.classList.add("fas");
-        icon.classList.add("fa-sun"); // Par défaut, utilise l'icône de soleil pour le mode clair
+    // Attribution des identifiants
+    form.id = 'myForm';
+    demo.id = 'demo';
+    input.id = 'cityInput';
+    weather.id = 'méteo';
 
-        // Ajouter un gestionnaire d'événement pour basculer le mode sombre
-        icon.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.classList.remove("fa-sun");
-                icon.classList.add("fa-moon"); // Change l'icône en lune pour le mode sombre
-            } else {
-                icon.classList.remove("fa-moon");
-                icon.classList.add("fa-sun"); // Change l'icône en soleil pour le mode clair
+    // Ajout de contenu aux éléments
+    weather.textContent = 'weather report';
+    label.textContent = 'Ville: ';
+    buttonVal.textContent = 'Obtenir la météo';
+    buttonDark.textContent = 'Dark mode';
+
+    // Ajout d'écouteur d'événement
+    buttonVal.addEventListener('click', getLocation);
+    buttonDark.addEventListener('click', ModeDark);
+
+    // Construction de la structure du DOM
+    form.appendChild(label);
+    form.appendChild(input);
+    form.appendChild(buttonVal);
+    mainContent.appendChild(weather);
+    mainContent.appendChild(form);
+    content.appendChild(mainContent);
+    mainContent.appendChild(buttonDark);
+    document.body.appendChild(content);
+};
+
+// Module pour le mode sombre
+const ModeDark = () => {
+    const element = document.body;
+    element.classList.toggle("dark-mode");
+};
+
+// Module pour obtenir la géolocalisation
+const getLocation = () => {
+    const demo = document.getElementById("demo");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        demo.innerHTML = "La géolocalisation n'est pas supportée par ce navigateur.";
+    }
+};
+
+// Fonction pour afficher la position
+const getCityLocation = (cityName) => {
+    // Remplacez 'YOUR_API_KEY' par votre clé API OpenWeatherMap
+    const apiKey = '61658e0f6a55b135fb312c5229d16fc5';
+    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+
+    fetch(weatherApiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('réponse non correct');
             }
+            return response.json();
+        })
+        .then(data => {
+            const coordinates = data.coord;
+            const latitude = coordinates.lat;
+            const longitude = coordinates.lon;
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            // Vous pouvez utiliser les coordonnées ici ou les passer à une autre fonction
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
         });
+};
 
-        // Ajouter un style CSS pour rendre l'icône cliquable
-        icon.style.cursor = 'pointer';
-
-        // Ajouter un identifiant pour l'icône
-        icon.setAttribute("id", "toggle-dark-mode");
-
-        // Ajouter l'icône à la fin du body
-        document.body.appendChild(icon);
-
-        // Fonction pour obtenir la météo de la ville
-        function getWeather(city) {
-            // Requête à l'API OpenWeatherMap
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Affichage des données météorologiques dans le DOM
-                    const weatherInfo = document.getElementById('weather-info');
-                    weatherInfo.innerHTML = `
-                        <p>City: ${data.name}</p>
-                        <p>Temperature: ${data.main.temp} °C</p>
-                        <p>Weather: ${data.weather[0].description}</p>
-                    `;
-                })
-                .catch(error => {
-                    console.error('Error fetching weather data:', error);
-                });
-        }
-
-        // Exemple d'utilisation de la fonction pour obtenir les données météorologiques de Paris
-        getWeather('Paris');
-
-        // Fonction pour obtenir la position de l'utilisateur
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById("demo").innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        // Fonction pour afficher la position
-        function showPosition(position) {
-            document.getElementById("demo").innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-        }
-
-        // Fonction pour afficher les erreurs de géolocalisation
-        function showError(error) {
-            let errorMessage = '';
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    errorMessage = "User denied the request for Geolocation.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    errorMessage = "Location information is unavailable.";
-                    break;
-                case error.TIMEOUT:
-                    errorMessage = "The request to get user location timed out.";
-                    break;
-                case error.UNKNOWN_ERROR:
-                    errorMessage = "An unknown error occurred.";
-                    break;
-            }
-            document.getElementById("demo").innerHTML = "Error: " + errorMessage;
-        }
-
-        // Appeler la fonction pour obtenir la position de l'utilisateur
-        getLocation();
+// Export des modules
+export { createElements, ModeDark, getLocation, getCityLocation };
