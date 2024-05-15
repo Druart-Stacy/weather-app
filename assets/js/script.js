@@ -1,5 +1,5 @@
-// Module pour la création des éléments DOM
-const createElements = () => {
+// Module "createElements"
+
     const mainContent = document.createElement('main');
     const form = document.createElement('form');
     const weather = document.createElement('h1');
@@ -8,23 +8,35 @@ const createElements = () => {
     const input = document.createElement('input');
     const buttonVal = document.createElement('button');
     const content = document.createElement('div');
-    const buttonDark = document.createElement('button');
+    const buttonDark = document.createElement('i');
 
     // Attribution des identifiants
     form.id = 'myForm';
     demo.id = 'demo';
     input.id = 'cityInput';
-    weather.id = 'méteo';
+    weather.id = 'weather';
 
     // Ajout de contenu aux éléments
-    weather.textContent = 'weather report';
+    weather.textContent = 'Weather report';
     label.textContent = 'Ville: ';
     buttonVal.textContent = 'Obtenir la météo';
-    buttonDark.textContent = 'Dark mode';
+    buttonDark.
+
+    // buttonDark.textContent = 'Dark mode';
+
+    buttonVal.textContent='Obtenir la méteo';
+buttonDark.textContent='Dark mode';
 
     // Ajout d'écouteur d'événement
     buttonVal.addEventListener('click', getLocation);
     buttonDark.addEventListener('click', ModeDark);
+
+    const weatherIcons = {
+        'soleil': '/assets/icon meteo/',
+        'nuageux': 'chemin/vers/icones/nuageux.png',
+        'pluie': 'chemin/vers/icones/pluie.png',
+        // Ajoutez d'autres conditions météorologiques et leurs icônes correspondantes ici
+      };
 
     // Construction de la structure du DOM
     form.appendChild(label);
@@ -35,31 +47,35 @@ const createElements = () => {
     content.appendChild(mainContent);
     mainContent.appendChild(buttonDark);
     document.body.appendChild(content);
-};
 
-// Module pour le mode sombre
-const ModeDark = () => {
-    const element = document.body;
+
+// Module "ModeDark"
+function ModeDark() {
+    var element = document.body;
     element.classList.toggle("dark-mode");
-};
-
-// Module pour obtenir la géolocalisation
-const getLocation = () => {
-    const demo = document.getElementById("demo");
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        demo.innerHTML = "La géolocalisation n'est pas supportée par ce navigateur.";
-    }
-};
-
-// Fonction pour afficher la position
-const getCityLocation = (cityName) => {
+  }
+  
+  //----------------------------------------------stockage local-------------------------------------
+  localStorage.setItem(cityName);
+  
+  //---------------------------------------------localisation--------------------------------------------
+  // Fonction pour obtenir la géolocalisation
+  function getLocation() {
+      const demo = document.getElementById("demo");
+  
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+          demo.innerHTML = "La géolocalisation n'est pas supportée par ce navigateur.";
+      }
+  }
+  
+  // Fonction pour afficher la position
+  function getCityLocation(cityName) {
     // Remplacez 'YOUR_API_KEY' par votre clé API OpenWeatherMap
     const apiKey = '61658e0f6a55b135fb312c5229d16fc5';
     const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-
+  
     fetch(weatherApiUrl)
         .then(response => {
             if (!response.ok) {
@@ -77,7 +93,8 @@ const getCityLocation = (cityName) => {
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);
         });
-};
-
-// Export des modules
-export { createElements, ModeDark, getLocation, getCityLocation };
+      }
+  
+  
+  
+  
