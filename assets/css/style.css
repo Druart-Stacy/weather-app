@@ -1,0 +1,26 @@
+@charset "UTF-8";
+body {
+  background-color: beige;
+}
+
+.content {
+  background-image: url(https://images.ctfassets.net/c3jfdk52c306/yurigahama-beach_04/76e74560651a6c54d343c57bdfe184cb/yurigahama-beach_04.jpg?fit=fill&w=1100&h=750&fm=webp);
+  background-repeat: no-repeat;
+  background-position: center; /* Centre l'image */
+  background-size: cover; /* Couvre tout l'élément */
+  height: 800px;
+  width: 1500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style pour l'icône de bascule de mode sombre */
+#toggle-dark-mode {
+  color: var(--text-color, #ffffff); /* Couleur du texte */
+}
+
+/* Style pour le mode sombre */
+.dark-mode {
+  background-color: var(--background-color, grey); /* Couleur de fond */
+}/*# sourceMappingURL=style.css.map */

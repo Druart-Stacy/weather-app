@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <title>weather-app</title>
+</head>
+<body>
+    <div class="content">
+        <main>
+            <!-- Formulaire de saisie de la ville -->
+            <form id="myForm" action="">
+                <!-- Étiquette pour le champ de saisie de la ville -->
+                <label for="cityInput">Ville: </label>
+                <input type="text" id="cityInput" name="fname"><br>
+                <!-- Bouton pour obtenir la météo -->
+                <input type="button" onclick="getLocation()" value="Obtenir la météo">
+            </form>
+
+            <!-- Affichage des coordonnées de la position -->
+            <p id="demo"></p>
+        </main>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script defer src="assets/js/script.js"></script>
+</body>
+</html>
