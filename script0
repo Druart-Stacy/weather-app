@@ -2,7 +2,7 @@
 const mainContent = document.createElement('main');
 const form = document.createElement('form');
 const weather = document.createElement('h1');
-const demo = document.createElement('p');
+const loc = document.createElement('p');
 const label = document.createElement('label');
 const input = document.createElement('input');
 const buttonVal = document.createElement('button');
@@ -12,7 +12,7 @@ const buttonDark=document.createElement('button');
 
 // Attribution des identifiants
 form.id = 'myForm';
-demo.id = 'demo';
+loc.id = 'loc';
 input.id = 'cityInput';
 weather.id = 'méteo';
 
@@ -62,12 +62,12 @@ localStorage.setItem(cityName);
 //---------------------------------------------localisation--------------------------------------------
 // Fonction pour obtenir la géolocalisation
 function getLocation() {
-    const demo = document.getElementById("demo");
+    const loc = document.getElementById("loc");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        demo.innerHTML = "La géolocalisation n'est pas supportée par ce navigateur.";
+        loc.innerHTML = "La géolocalisation n'est pas supportée par ce navigateur.";
     }
 }
 

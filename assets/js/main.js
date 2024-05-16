@@ -1,27 +1,23 @@
-// main.js
-import { getLocation } from './geolocation.js';
-import { fetchWeather } from './weather.js';
-import { displayPhoto } from './unsplash.js';
+import { fetchWeatherData, getWeatherIconUrl } from './weather.js';
+import { displayWeather, displayWeatherIcon, displayPhoto } from './ui.js';
 import { renderChart } from './chart.js';
+import { getCityPhoto } from './unsplash.js';
 
-document.getElementById('weatherForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const city = document.getElementById('cityInput').value;
-    fetchWeather(city);
-    displayPhoto(city);
-    // Appeler d'autres fonctionnalités si nécessaire
-});
-
-document.getElementById('toggle-dark-mode').addEventListener('click', toggleDarkMode);
-
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const icon = document.getElementById('toggle-dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    } else {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
+const cityForm = document.getElementById('city-form');
+const cityInput = document.getElementById('city-input');
+const addcitybutton=document.getElementById('add-city-button');
+cityForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const city = cityInput.value.trim();
+    const city2= addcitybutton.value.trim();
+    if (city) {
+        try {
+            const weatherData = await fetchWeatherData(city, '1d05715f85aa25a75f149917e53482cf');
+            displayWeather(weatherData);
+            displayWeatherIcon(getWeatherIconUrl(weatherData.weather[0].icon));
+            await getCityPhoto(city, 'T4dPSXMnbr7qtsaqFg8-UPnjpOBrVW06QvjK1O2ndws');
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
     }
-}
+});

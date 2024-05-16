@@ -1,4 +1,3 @@
-// geolocation.js
 export function getLocation() {
     return new Promise((resolve, reject) => {
         if (navigator.geolocation) {

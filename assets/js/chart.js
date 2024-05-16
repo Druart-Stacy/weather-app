@@ -1,5 +1,4 @@
-// chart.js
-import Chart from 'chart.js/auto';
+// import Chart from './chart.js';
 
 export function renderChart(data) {
     const ctx = document.getElementById('weatherChart').getContext('2d');
