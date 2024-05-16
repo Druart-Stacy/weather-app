@@ -1,3 +1,10 @@
+// style.scss
+@import 'variables';
+@import 'reset';
+@import 'base';
+@import 'layout';
+@import 'components';
+
 //-------------GSM-----------------------------------------------------------
 body {
     background-image: url(https://images.ctfassets.net/c3jfdk52c306/yurigahama-beach_04/76e74560651a6c54d343c57bdfe184cb/yurigahama-beach_04.jpg?fit=fill&w=1100&h=750&fm=webp);
