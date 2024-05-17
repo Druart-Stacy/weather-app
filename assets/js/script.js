@@ -1,6 +1,6 @@
 // Définition des éléments HTML
 const cityForm = document.getElementById('weatherForm');
-const cityInput = document.getElementById('city-input');
+const cityInput = document.getElementById('cityInput');
 
 // Déclaration de l'access key pour Unsplash
 const accessKey = 'T4dPSXMnbr7qtsaqFg8-UPnjpOBrVW06QvjK1O2ndws';
@@ -13,7 +13,7 @@ async function getCityPhoto(city) {
         const data = await response.json();
         return data.urls.regular;
     } catch (error) {
-        console.error('Error fetching photo:', error);
+        console.log('Error fetching photo:', error);
         return null; // Retourne null en cas d'erreur
     }
 }
@@ -29,15 +29,16 @@ cityForm.addEventListener('submit', async (e) => {
             displayWeatherIcon(getWeatherIconUrl(weatherData.weather[0].icon));
             const photoUrl = await getCityPhoto(city);
             displayPhoto(photoUrl);
+            saveCity(city);
         } catch (error) {
-            console.error('Error fetching weather data:', error);
+            console.log('Error fetching weather data:', error);
         }
     }
 });
 
 // Fonction pour récupérer les informations météorologiques
 async function fetchWeather(city) {
-    const apiKey = '61658e0f6a55b135fb312c5229d16fc5'; // Assurez-vous de remplacer 'YOUR_API_KEY' par votre propre clé API OpenWeatherMap
+    const apiKey = '1d05715f85aa25a75f149917e53482cf';
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     try {
@@ -45,7 +46,7 @@ async function fetchWeather(city) {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.log('Error fetching weather data:', error);
         throw error;
     }
 }
@@ -56,7 +57,7 @@ function saveCity(city) {
         localStorage.setItem('lastCity', city);
         console.log('Ville enregistrée avec succès:', city);
     } catch (error) {
-        console.error('Erreur lors de l\'enregistrement de la ville:', error);
+        console.log('Erreur lors de l\'enregistrement de la ville:', error);
     }
 }
 
@@ -65,7 +66,31 @@ fetchWeather("yurigahama").then(weatherData => {
     displayWeather(weatherData);
     displayWeatherIcon(getWeatherIconUrl(weatherData.weather[0].icon));
 }).catch(error => {
-    console.error('Error fetching weather data:', error);
+    console.log('Error fetching weather data:', error);
 });
 
-// Remarque: Les fonctions `displayWeather`, `displayWeatherIcon`, `displayPhoto`, et `getWeatherIconUrl` doivent être définies ailleurs dans votre code.
+// Déclaration des fonctions manquantes (à adapter selon vos besoins)
+function displayWeather(weatherData) {
+    const weatherContainer = document.getElementById('weather-container');
+    weatherContainer.textContent = `Météo à ${weatherData.name}: ${weatherData.weather[0].description}, Température: ${weatherData.main.temp}°C`;
+}
+
+function displayWeatherIcon(iconUrl) {
+    const weatherContainer = document.getElementById('weather-container');
+    const img = document.createElement('img');
+    img.src = iconUrl;
+    weatherContainer.appendChild(img);
+}
+
+function displayPhoto(photoUrl) {
+    if (photoUrl) {
+        const weatherContainer = document.getElementById('weather-container');
+        const img = document.createElement('img');
+        img.src = photoUrl;
+        weatherContainer.appendChild(img);
+    }
+}
+
+function getWeatherIconUrl(icon) {
+    return `http://openweathermap.org/img/wn/${icon}@2x.png`;
+}
