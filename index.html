@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,29 +7,30 @@
     <title>Weather App</title>
 </head>
 <body>
-    <div class="photo"></div>
     <div class="container">
         <header>
             <h1>Weather App</h1>
-            <i id="toggle-dark-mode" class="fas fa-sun"></i>
+            
         </header>
         <main>
             <form id="weatherForm">
+                <i id="toggle-dark-mode" class="fas fa-sun"></i>
                 <label for="cityInput">Ville: </label>
                 <input type="text" id="cityInput" required>
                 <button type="submit">Obtenir la météo</button>
             </form>
             <div id="weatherResults"></div>
             <canvas id="weatherChart"></canvas>
+            
         </main>
         <footer>
             <p id="demo"></p>
         </footer>
     </div>
-    <script defer src="assets/js/main.js"></script>
-    <script defer src="assets/js/chart.js"></script>
+    <script defer src="assets/js/script.js"></script>
+    <!--<script defer src="assets/js/chart.js"></script>
     <script defer src="assets/js/geolocation.js"></script>
     <script defer src="assets/js/unsplash.js"></script>
-    <script defer src="assets/js/weather.js"></script>
+    <script defer src="assets/js/weather.js"></script> -->
 </body>
 </html>

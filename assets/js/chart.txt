@@ -1,0 +1,39 @@
+// import Chart from 'chart.js/auto';
+
+function renderChart(data) {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    const labels = data.map(item => item.label); // Supposons que vos données ont une propriété 'label'
+    const values = data.map(item => item.value); // Supposons que vos données ont une propriété 'value'
+
+    const chartData = {
+        labels: labels,
+        datasets: [{
+            label: 'Weather Data', // Modifiez ce label selon vos besoins
+            data: values,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    const config = {
+        type: 'line', // Vous pouvez choisir le type de graphique ('bar', 'line', 'pie', etc.)
+        data: chartData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // Détruire le graphique existant s'il existe pour éviter l'erreur de superposition
+    if (window.myChart) {
+        window.myChart.destroy();
+    }
+
+    // Créer un nouveau graphique
+    window.myChart = new Chart(ctx, config);
+}
