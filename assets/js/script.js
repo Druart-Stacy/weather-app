@@ -5,18 +5,22 @@ const cityInput = document.getElementById('cityInput');
 // Déclaration de l'access key pour Unsplash
 const accessKey = 'T4dPSXMnbr7qtsaqFg8-UPnjpOBrVW06QvjK1O2ndws';
 
-// Fonction pour récupérer la photo d'une ville
 async function getCityPhoto(city) {
     try {
-        const unsplashApiUrl = `https://api.unsplash.com/photos/random?query=${city}&client_id=${accessKey}`;
+        const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${accessKey}&per_page=1`;
         const response = await fetch(unsplashApiUrl);
         const data = await response.json();
-        return data.urls.regular;
+        if (data.results && data.results.length > 0) {
+            return data.results[0].urls.regular;
+        } else {
+            return null; // Aucun résultat trouvé
+        }
     } catch (error) {
         console.log('Error fetching photo:', error);
         return null; // Retourne null en cas d'erreur
     }
 }
+
 
 // Événement pour soumettre le formulaire de la ville
 cityForm.addEventListener('submit', async (e) => {
