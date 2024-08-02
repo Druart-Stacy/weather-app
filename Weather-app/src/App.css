@@ -1,0 +1,112 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+/* // style.scss */
+@import 'variables';
+@import 'reset';
+@import 'base';
+@import 'layout';
+@import 'components';
+/* 
+//-------------GSM----------------------------------------------------------- */
+
+body {
+    /* // background-image: url(https://images.ctfassets.net/c3jfdk52c306/yurigahama-beach_04/76e74560651a6c54d343c57bdfe184cb/yurigahama-beach_04.jpg?fit=fill&w=1100&h=750&fm=webp);
+    // background-repeat: no-repeat;
+    // background-position: center; /* Centre l'image */
+    /* // background-size: cover; /* Couvre tout l'élément */
+    /* // height: 800px;  */
+    
+    /* // display: flex;
+    // justify-content: center;
+    // align-items: center; */
+    background-color: aqua;
+}
+
+.container {
+    display: flex;
+}
+
+.mainContent {
+    display:flex;
+    
+    
+}
+#méteo{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Style pour l'icône de bascule de mode sombre */
+body {
+    padding: 25px;
+    background-color: white;
+    color: black;
+    font-size: 25px;
+  }
+  
+  .dark-mode {
+    background-color: gray;
+    color: white;
+  }
+
+/* // img de la ville */
+#weather-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#weather-container img {
+    display: flex;
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+
+}
+
+/* --------------------ecran------------ */
+@media only screen and (mix-width: 480px){
+
+}
