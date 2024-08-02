@@ -5,13 +5,18 @@ const cityInput = document.getElementById('cityInput');
 // Déclaration de l'access key pour Unsplash
 const accessKey = 'T4dPSXMnbr7qtsaqFg8-UPnjpOBrVW06QvjK1O2ndws';
 
+// Fonction pour récupérer la photo d'une ville
 async function getCityPhoto(city) {
+    const width = 600; // Largeur souhaitée
+    const height = 400; // Hauteur souhaitée
+
     try {
         const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${accessKey}&per_page=1`;
         const response = await fetch(unsplashApiUrl);
         const data = await response.json();
         if (data.results && data.results.length > 0) {
-            return data.results[0].urls.regular;
+            const photoUrl = data.results[0].urls.raw; // Utilisation de l'URL 'raw' pour transformation
+            return `${photoUrl}&w=${width}&h=${height}&fit=crop`;
         } else {
             return null; // Aucun résultat trouvé
         }
@@ -19,7 +24,39 @@ async function getCityPhoto(city) {
         console.log('Error fetching photo:', error);
         return null; // Retourne null en cas d'erreur
     }
+    function displayPhoto(photoUrl) {
+        if (photoUrl) {
+            const weatherContainer = document.getElementById('weather-container');
+            weatherContainer.innerHTML = ''; 
+            // Vide le conteneur avant d'ajouter une nouvelle image
+    
+            const img = document.createElement('img');
+            img.src = photoUrl;
+            img.alt = 'Photo de la ville';
+    
+            weatherContainer.appendChild(img);
+        }
+    }
+    
 }
+
+// async function getCityPhoto(city) {
+//     const width = 100; 
+//     const height=100;
+//     try {
+//         const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${accessKey}&per_page=1`;
+//         const response = await fetch(unsplashApiUrl);
+//         const data = await response.json();
+//         if (data.results && data.results.length > 0) {
+//             return data.results[0].urls.regular;
+//         } else {
+//             return null; // Aucun résultat trouvé
+//         }
+//     } catch (error) {
+//         console.log('Error fetching photo:', error);
+//         return null; // Retourne null en cas d'erreur
+//     }
+// }
 
 
 // Événement pour soumettre le formulaire de la ville
