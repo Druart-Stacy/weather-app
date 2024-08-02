@@ -56,7 +56,26 @@ function App() {
       fetchCityPhoto(city);
     }
   };
+  function displayForecast(data) {
+    const forecastContainer = document.getElementById('forecast');
+    forecastContainer.innerHTML = ''; // Efface le contenu précédent
+    data.daily.forEach((day) => {
+        const date = new Date(day.dt * 1000).toLocaleDateString();
+        const tempDay = day.temp.day;
+        const tempNight = day.temp.night;
+        const weatherDescription = day.weather[0].description;
 
+        const dayDiv = document.createElement('div');
+        dayDiv.classList.add('day');
+        dayDiv.innerHTML = `
+            <h3>${date}</h3>
+            <p>Jour : ${tempDay}°C</p>
+            <p>Nuitt : ${tempNight}°C</p>
+            <p>${weatherDescription}</p>
+        `;
+        forecastContainer.appendChild(dayDiv);
+    });
+}
   return (
     <div className="App">
       <h1>Weather App</h1>

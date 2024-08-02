@@ -14,7 +14,13 @@ function Weather({ weatherData, photoUrl }) {
       <p>{weather[0].description}, Temperature: {main.temp}°C</p>
       <img src={iconUrl} alt="Weather icon" />
       {photoUrl && <img src={photoUrl} alt="City view" />}
-    </div>
+    
+    
+    <h2>Weather in {name}</h2>
+    <p>{weather[0].description}, Temperature: {main.temp}°C</p>
+    <img src={iconUrl} alt="Weather icon" />
+    
+  </div>
   );
 }
 
