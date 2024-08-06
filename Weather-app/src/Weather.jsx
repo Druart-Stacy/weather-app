@@ -16,10 +16,10 @@ function Weather({ weatherData, photoUrl }) {
       {photoUrl && <img src={photoUrl} alt="City view" />}
     
     
-    <h2>Weather in {name}</h2>
+    {/* <h2>Weather in {name}</h2>
     <p>{weather[0].description}, Temperature: {main.temp}°C</p>
     <img src={iconUrl} alt="Weather icon" />
-    
+     */}
   </div>
   );
 }

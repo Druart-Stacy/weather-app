@@ -41,11 +41,11 @@
   color: #888;
 }
 /* // style.scss */
-@import 'variables';
+/* @import 'variables';
 @import 'reset';
 @import 'base';
 @import 'layout';
-@import 'components';
+@import 'components'; */
 /* 
 //-------------GSM----------------------------------------------------------- */
 

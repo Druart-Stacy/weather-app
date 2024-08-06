@@ -93,5 +93,15 @@ function App() {
     </div>
   );
 }
+function getWeather(lat, lon) {
+  const url = `${apiUrl}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&appid=${apiKey}`;
+  fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          displayCurrentWeather(data.current);
+          displayForecast(data.daily); // Cette ligne envoie les données journalières à la fonction displayForecast
+      })
+      .catch(error => console.error('Erreur lors de la récupération des données météo :', error));
+}
 
 export default App;
